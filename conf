@@ -1,0 +1,28 @@
+#!/bin/bash
+set -exuo pipefail
+
+declare -r BDEPS=(
+    curl
+)
+
+declare -r DEPS=(
+    php-bz2
+    php-gd
+    php-ldap
+    php-mysql
+    php-zip
+    php-xml
+)
+
+apt-get install "${BDEPS[@]}" "${DEPS[@]}"
+
+declare -r SHA1="ba4b136b41a89cd8bba3a1784ee2227d3eb21a18" # 3.9.0
+declare -r URL="https://github.com/joomla/joomla-cms/releases/download/${PRODUCT_VERSION}/Joomla_${PRODUCT_VERSION}-Stable-Full_Package.tar.gz"
+
+curl -o joomla.tar.gz -SL "${URL}"
+echo "${SHA1} *joomla.tar.gz" | sha1sum -c -
+
+mv joomla.tar.gz "${SRCDIR}"
+chown www-data:www-data "${SRCDIR}/joomla.tar.gz"
+
+apt-get purge "${BDEPS[@]}"

@@ -1,0 +1,118 @@
+{
+    "build": {
+        "KEEP_USER": "www-data"
+    },
+    "meta": {
+        "name": "joomla",
+        "version": "3.9.0",
+        "containers": [
+            { 
+                "name": "joomla",
+                "version": "3.9.0",
+                "ports": {
+                    "22": "tcp"
+                },
+                "mountPoints": [
+                    {
+                        "sourceVolume": "webroot",
+                        "containerPath": "/var/www/html",
+                        "readOnly": false
+                    },
+                    {
+                        "sourceVolume": "vhosts",
+                        "containerPath": "/etc/turnkey/vhosts",
+                        "readOnly": false
+                    },
+                    {
+                        "sourceVolume": "initdb",
+                        "containerPath": "/etc/turnkey/initdb",
+                        "readOnly": false
+                    },
+                    {
+                        "sourceVolume": "secrets",
+                        "containerPath": "/etc/turnkey/secrets",
+                        "readOnly": true
+                    }
+                ],
+                "environment": {
+                    "APP_USER": "admin",
+                    "APP_PASS": "turnkey1",
+                    "APP_MAIL": "admin@example.com",
+                    "DB_USER": "joomla",
+                    "DB_NAME": "joomla",
+                    "DB_PASS": "turnkey1"
+                },
+                "cpu": 256,
+                "ram": 256,
+                "pre_confs": [
+                    {
+                        "name": "php-fpm",
+                        "version": "7.2"
+                    }
+                ]
+            },
+            {
+                "name": "nginx",
+                "version": "1.14.0",
+                "ports": {
+                    "80": "tcp",
+                    "443": "tcp"
+                },
+                "mountPoints": [
+                    {
+                        "sourceVolume": "webroot",
+                        "containerPath": "/var/www/html",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "vhosts",
+                        "containerPath": "/etc/turnkey/vhosts",
+                        "readOnly": true
+                    }
+                ],
+                "cpu": 256,
+                "ram": 256
+            },
+            {
+                "name": "mariadb",
+                "version": "10.1",
+                "ports": {
+                    "3306": "tcp"
+                },
+                "mountPoints": [
+                    {
+                        "sourceVolume": "initdb",
+                        "containerPath": "/etc/turnkey/initdb",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "secrets",
+                        "containerPath": "/etc/turnkey/secrets",
+                        "readOnly": true
+                    }
+                ],
+                "environment": {
+                    "DB_USER": "joomla",
+                    "DB_NAME": "joomla",
+                    "DB_PASS": "turnkey1"
+                },
+                "cpu": 256,
+                "ram": 512
+            }
+        ],
+        "volumes": [
+            {
+                "name": "webroot"
+            },
+            {
+                "name": "vhosts"
+            },
+            {
+                "name": "initdb"
+            },
+            {
+                "name": "secrets"
+            }
+        ]
+    }
+}
