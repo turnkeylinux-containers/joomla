@@ -1,17 +1,15 @@
 {
-    "build": {
-        "KEEP_USER": "www-data"
-    },
     "meta": {
-        "name": "joomla",
-        "version": "3.9.0",
+        "build_args": {
+            "PRODUCT_NAME": "joomla",
+            "PRODUCT_VERSION": "3.9.4",
+            "BASE_IMAGE": "qrntz/php-fpm:7.3",
+            "KEEP_USER": "www-data"
+        },
         "containers": [
             { 
                 "name": "joomla",
-                "version": "3.9.0",
-                "ports": {
-                    "22": "tcp"
-                },
+                "version": "3.9.4",
                 "mountPoints": [
                     {
                         "sourceVolume": "webroot",
@@ -43,17 +41,11 @@
                     "DB_PASS": "turnkey1"
                 },
                 "cpu": 256,
-                "ram": 256,
-                "pre_confs": [
-                    {
-                        "name": "php-fpm",
-                        "version": "7.2"
-                    }
-                ]
+                "ram": 256
             },
             {
                 "name": "nginx",
-                "version": "1.14.0",
+                "version": "1.14.2",
                 "ports": {
                     "80": "tcp",
                     "443": "tcp"
@@ -75,7 +67,7 @@
             },
             {
                 "name": "mariadb",
-                "version": "10.1",
+                "version": "10.3",
                 "ports": {
                     "3306": "tcp"
                 },
@@ -101,18 +93,10 @@
             }
         ],
         "volumes": [
-            {
-                "name": "webroot"
-            },
-            {
-                "name": "vhosts"
-            },
-            {
-                "name": "initdb"
-            },
-            {
-                "name": "secrets"
-            }
+            { "name": "webroot" },
+            { "name": "vhosts" },
+            { "name": "initdb" },
+            { "name": "secrets" }
         ]
     }
 }
