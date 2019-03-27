@@ -3,7 +3,7 @@
         "build_args": {
             "PRODUCT_NAME": "joomla",
             "PRODUCT_VERSION": "3.9.4",
-            "BASE_IMAGE": "qrntz/php-fpm:7.3",
+            "BASE_IMAGE": "php-fpm:7.3",
             "KEEP_USER": "www-data"
         },
         "containers": [
