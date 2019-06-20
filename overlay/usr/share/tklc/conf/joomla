@@ -16,7 +16,7 @@ declare -r DEPS=(
 
 apt-get install "${BDEPS[@]}" "${DEPS[@]}"
 
-declare -r SHA1="c263ccf8abcd120930bb8acf8dd38fcc2d172923" # 3.9.4
+declare -r SHA1="402f83aa64533e9568a0d8923a71997ff18c331e" # 3.9.8
 declare -r URL="https://github.com/joomla/joomla-cms/releases/download/${PRODUCT_VERSION}/Joomla_${PRODUCT_VERSION}-Stable-Full_Package.tar.gz"
 
 curl -o joomla.tar.gz -SL "${URL}"
