@@ -2,14 +2,14 @@
     "meta": {
         "build_args": {
             "PRODUCT_NAME": "joomla",
-            "PRODUCT_VERSION": "3.9.4",
+            "PRODUCT_VERSION": "3.9.8",
             "BASE_IMAGE": "$REPO/php-fpm:7.3",
             "KEEP_USER": "www-data"
         },
         "containers": [
             { 
                 "name": "joomla",
-                "version": "3.9.4",
+                "version": "3.9.8",
                 "mountPoints": [
                     {
                         "sourceVolume": "webroot",
