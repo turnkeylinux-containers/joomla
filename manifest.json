@@ -68,9 +68,6 @@
             {
                 "name": "mariadb",
                 "version": "10.3",
-                "ports": {
-                    "3306": "tcp"
-                },
                 "mountPoints": [
                     {
                         "sourceVolume": "initdb",
